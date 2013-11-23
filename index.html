@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Chain 'em!</title>
+    <script src="q.js"></script>
+    <script src="q.chain.js"></script>
+</head>
+
+<body>
+    <h1>Chain 'em!</h1>
+    <p>Check the console!</p>
+    <script>
+	    function task(i) {
+	        return function(deferred) {
+	            var delay = Math.floor(1000 * (Math.random() * 2) + 1);
+	            console.log(delay);
+	            setTimeout(function() {
+	                deferred.resolve(function() {
+	                    console.log(i);
+	                });
+	            }, delay)
+	        }
+	    }
+
+	    Q.chain([task(0), task(1), task(2)]);
+    </script>
+</body>
+
+</html>
